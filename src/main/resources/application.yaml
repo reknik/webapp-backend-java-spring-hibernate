@@ -1,0 +1,7 @@
+#
+# JWT properties
+#
+jwt.salt=testSalt
+
+
+server.port = 8888
