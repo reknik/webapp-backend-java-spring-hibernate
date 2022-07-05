@@ -1,8 +1,8 @@
 package com.reknik.webAppDemoBackend.controller;
 
-import com.reknik.webAppDemoBackend.entity.Job;
-import com.reknik.webAppDemoBackend.entity.dto.JobDto;
-import com.reknik.webAppDemoBackend.service.JobService;
+import com.reknik.webAppDemoBackend.entity.Company;
+import com.reknik.webAppDemoBackend.entity.dto.CompanyDto;
+import com.reknik.webAppDemoBackend.service.CompanyService;
 import java.util.List;
 import java.util.Optional;
 import net.gsdgroup.logging.Logger;
@@ -20,58 +20,58 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/job")
-public class JobController {
+@RequestMapping("/api/company")
+public class CompanyController {
 
-  private final JobService jobService;
+  private final CompanyService companyService;
 
   @Autowired
-  public JobController(JobService jobService) {
-    this.jobService = jobService;
+  public CompanyController(CompanyService companyService) {
+    this.companyService = companyService;
   }
 
   @GetMapping("/getById")
   public ResponseEntity<?> getById(@RequestParam(name = "id") int id) {
-    Optional<Job> JobOptional;
+    Optional<Company> CompanyOptional;
     try {
-      JobOptional = jobService.getJobById(id);
+      CompanyOptional = companyService.getCompanyById(id);
     } catch (Exception e) {
-      Logger.warn("Couldn't fetch job for id " + id);
+      Logger.warn("Couldn't fetch company for id " + id);
       return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
-    return JobOptional.map(Job -> new ResponseEntity<>(Job, HttpStatus.OK))
+    return CompanyOptional.map(Company -> new ResponseEntity<>(Company, HttpStatus.OK))
         .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
   @GetMapping(path = "/getAll", produces = {MediaType.APPLICATION_JSON_VALUE})
   public ResponseEntity<?> getAll() {
-    List<Job> jobs;
+    List<Company> companies;
     try {
-      jobs = jobService.getJobs();
+      companies = companyService.getCompanies();
     } catch (Exception e) {
-      Logger.warn("Couldn't fetch jobs");
+      Logger.warn("Couldn't fetch companies");
       return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
-    return new ResponseEntity<>(jobs, HttpStatus.OK);
+    return new ResponseEntity<>(companies, HttpStatus.OK);
   }
 
   @PostMapping("/save")
-  public ResponseEntity<?> save(@RequestBody JobDto job) {
+  public ResponseEntity<?> save(@RequestBody CompanyDto company) {
     try {
-      jobService.saveJob(job);
+      companyService.saveCompany(company);
     } catch (Exception e) {
-      Logger.warn("Couldn't save job");
+      Logger.warn("Couldn't save company");
       return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
   @PutMapping("/update")
-  public ResponseEntity<?> update(@RequestBody JobDto job) {
+  public ResponseEntity<?> update(@RequestBody CompanyDto company) {
     try {
-      jobService.updateJob(job);
+      companyService.updateCompany(company);
     } catch (Exception e) {
-      Logger.warn("Couldn't update job for id " + job.getId());
+      Logger.warn("Couldn't update company for id " + company.getId());
       return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
     return new ResponseEntity<>(HttpStatus.OK);
@@ -80,9 +80,9 @@ public class JobController {
   @DeleteMapping("/deleteById")
   public ResponseEntity<?> deleteById(@RequestParam(name = "id") int id) {
     try {
-      jobService.deleteJobById(id);
+      companyService.deleteCompanyById(id);
     } catch (Exception e) {
-      Logger.warn("Couldn't delete job for id " + id);
+      Logger.warn("Couldn't delete company for id " + id);
       return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
     return new ResponseEntity<>(HttpStatus.OK);

@@ -1,19 +1,11 @@
 package com.reknik.webAppDemoBackend.entity.dto;
 
-import com.reknik.webAppDemoBackend.entity.Address;
-import com.reknik.webAppDemoBackend.entity.Contact;
 import java.time.Year;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,14 +25,6 @@ public class EmployeeDto {
 
   @Column(name = "d_license")
   private boolean drivingLicense;
-
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  @JoinColumn(name = "employeeID")
-  private List<Address> addresses = new ArrayList<>();
-
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  @JoinColumn(name = "employeeID")
-  private List<Contact> contacts = new ArrayList<>();
 
   @Column(name = "year")
   private int birthYear;
@@ -75,22 +59,6 @@ public class EmployeeDto {
 
   public void setDrivingLicense(boolean drivingLicense) {
     this.drivingLicense = drivingLicense;
-  }
-
-  public List<Address> getAddresses() {
-    return addresses;
-  }
-
-  public void setAddresses(List<Address> addresses) {
-    this.addresses = addresses;
-  }
-
-  public List<Contact> getContacts() {
-    return contacts;
-  }
-
-  public void setContacts(List<Contact> contacts) {
-    this.contacts = contacts;
   }
 
   public int getBirthYear() {

@@ -11,14 +11,12 @@ import java.util.stream.Collectors;
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Component;
 
 
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -46,13 +44,13 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     Algorithm algorithm = Algorithm.HMAC256(jwtSalt.getBytes(StandardCharsets.UTF_8));
     String accessToken = JWT.create()
         .withSubject(user.getUsername())
-        .withExpiresAt(new Date(Instant.now().plus(10, ChronoUnit.HOURS).toEpochMilli()))
+        .withExpiresAt(new Date(Instant.now().plus(365, ChronoUnit.MINUTES).toEpochMilli()))
         .withIssuer(request.getRequestURL().toString())
         .withClaim("role", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
         .sign(algorithm);
     String refreshToken = JWT.create()
         .withSubject(user.getUsername())
-        .withExpiresAt(new Date(Instant.now().plus(1, ChronoUnit.DAYS).toEpochMilli()))
+        .withExpiresAt(new Date(Instant.now().plus(365, ChronoUnit.DAYS).toEpochMilli()))
         .withIssuer(request.getRequestURL().toString())
         .sign(algorithm);
     response.setHeader("access_token", accessToken);

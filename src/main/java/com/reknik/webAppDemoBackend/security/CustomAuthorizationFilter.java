@@ -13,6 +13,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.gsdgroup.logging.Logger;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,7 +30,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
-    if (request.getServletPath().equals("/api/user/login") || request.getServletPath().equals("/api/user/register")) {
+    if (request.getServletPath().contains("/api/user/login") || request.getServletPath().contains("/api/user/register")) {
       filterChain.doFilter(request, response);
     } else {
       String authorizationHeader = request.getHeader("Authorization");
@@ -46,6 +47,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
           SecurityContextHolder.getContext().setAuthentication(authenticationToken);
           filterChain.doFilter(request, response);
         } catch (Exception e) {
+          Logger.warn("Authentication failed for " + authorizationHeader);
           response.setHeader("ERROR", e.getMessage());
           response.sendError(HttpServletResponse.SC_FORBIDDEN);
         }

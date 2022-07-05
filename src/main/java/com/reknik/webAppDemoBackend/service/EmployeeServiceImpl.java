@@ -3,13 +3,10 @@ package com.reknik.webAppDemoBackend.service;
 import com.reknik.webAppDemoBackend.dao.CompanyDao;
 import com.reknik.webAppDemoBackend.dao.EmployeeDao;
 import com.reknik.webAppDemoBackend.dao.JobDao;
-import com.reknik.webAppDemoBackend.entity.Company;
 import com.reknik.webAppDemoBackend.entity.Employee;
-import com.reknik.webAppDemoBackend.entity.Job;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

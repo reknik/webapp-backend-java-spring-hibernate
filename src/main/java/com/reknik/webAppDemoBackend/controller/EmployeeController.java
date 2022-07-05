@@ -4,6 +4,7 @@ import com.reknik.webAppDemoBackend.entity.Employee;
 import com.reknik.webAppDemoBackend.service.EmployeeService;
 import java.util.List;
 import java.util.Optional;
+import net.gsdgroup.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,6 +31,7 @@ public class EmployeeController {
     try {
       employeeOptional = employeeService.getEmployeeById(id);
     } catch (Exception e) {
+      Logger.warn("Couldn't fetch employee for id " + id);
       return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
     return employeeOptional.map(employee -> new ResponseEntity<>(employee, HttpStatus.OK))
@@ -37,12 +39,13 @@ public class EmployeeController {
   }
 
   @GetMapping(path = "/getAll", produces = {MediaType.APPLICATION_JSON_VALUE})
-  public ResponseEntity<List<Employee>> getAll() {
-    List<Employee> employees = null;
+  public ResponseEntity<?> getAll() {
+    List<Employee> employees;
     try {
       employees = employeeService.getEmployees();
     } catch (Exception e) {
-      e.printStackTrace();
+      Logger.warn("Couldn't fetch employees");
+      return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
     return new ResponseEntity<>(employees, HttpStatus.OK);
   }
@@ -52,6 +55,7 @@ public class EmployeeController {
     try {
       employeeService.saveEmployee(employee);
     } catch (Exception e) {
+      Logger.warn("Couldn't save employee");
       return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
     return new ResponseEntity<>(HttpStatus.OK);
@@ -62,6 +66,7 @@ public class EmployeeController {
     try {
       employeeService.updateEmployee(employee);
     } catch (Exception e) {
+      Logger.warn("Couldn't update employee for id " + employee.getId());
       return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
     return new ResponseEntity<>(HttpStatus.OK);
@@ -72,6 +77,7 @@ public class EmployeeController {
     try {
       employeeService.deleteEmployeeById(id);
     } catch (Exception e) {
+      Logger.warn("Couldn't delete employee for id " + id);
       return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
     return new ResponseEntity<>(HttpStatus.OK);

@@ -1,7 +1,9 @@
 #
 # JWT properties
 #
-jwt.salt=testSalt
+jwt:
+  salt: testSalt
 
 
-server.port = 8888
+server:
+  port: 8888

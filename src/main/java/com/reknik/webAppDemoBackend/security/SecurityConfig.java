@@ -18,12 +18,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
+  private final UserServiceImpl userService;
   @Value("${jwt.salt}")
   private String jwtsalt;
 
-
   @Autowired
-  private UserServiceImpl userService;
+  public SecurityConfig(UserServiceImpl userService) {
+    this.userService = userService;
+  }
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -34,7 +36,7 @@ public class SecurityConfig {
         .antMatchers("/api/user/login")
         .permitAll()
         .antMatchers("/api/user/register")
-        .permitAll()//TODO change zis when prezetare is happening
+        .hasAuthority(WebAppUserRoles.ADMIN.name())
         .antMatchers("/api/employee/*")
         .hasAnyAuthority(WebAppUserRoles.ADMIN.name(), WebAppUserRoles.USER.name())
         .anyRequest()

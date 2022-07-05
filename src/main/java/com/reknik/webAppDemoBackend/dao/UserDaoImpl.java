@@ -3,6 +3,8 @@ package com.reknik.webAppDemoBackend.dao;
 import com.reknik.webAppDemoBackend.entity.WebAppUser;
 import java.util.List;
 import java.util.Optional;
+import javax.persistence.NoResultException;
+import net.gsdgroup.logging.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -24,7 +26,15 @@ public class UserDaoImpl implements UserDao {
     Session session = sessionFactory.getCurrentSession();
     Query<WebAppUser> query = session.createQuery("FROM WebAppUser where username =:aUsername", WebAppUser.class);
     query.setParameter("aUsername", username);
-    return Optional.ofNullable(query.getSingleResult());
+    try {
+      return Optional.of(query.getSingleResult());
+    } catch (NoResultException e) {
+      Logger.warn("User " + username + " was not found");
+      return Optional.empty();
+    } catch (Exception e) {
+      Logger.warn(e.getMessage());
+      return Optional.empty();
+    }
   }
 
   @Override

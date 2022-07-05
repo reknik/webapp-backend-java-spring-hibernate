@@ -1,12 +1,8 @@
 package com.reknik.webAppDemoBackend.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.reknik.webAppDemoBackend.entity.dto.CompanyDto;
 import com.reknik.webAppDemoBackend.entity.dto.JobDto;
 import java.time.Year;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;

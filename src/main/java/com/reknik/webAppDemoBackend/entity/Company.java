@@ -3,7 +3,6 @@ package com.reknik.webAppDemoBackend.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.reknik.webAppDemoBackend.entity.dto.EmployeeDto;
-import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

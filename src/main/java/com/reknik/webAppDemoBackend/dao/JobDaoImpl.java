@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.QueryHints;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,7 +26,8 @@ public class JobDaoImpl implements JobDao {
   @Override
   public Optional<Job> getJobById(int id) {
     Session session = sessionFactory.getCurrentSession();
-    Query<Job> query = session.createQuery("FROM Job where id =:paramId", Job.class);
+    Query<Job> query = session.createQuery("select distinct j from Job j left join fetch j.employees where j.id=:paramId", Job.class)
+        .setHint(QueryHints.PASS_DISTINCT_THROUGH, false);
     query.setParameter("paramId", id);
     return Optional.ofNullable(query.getSingleResult());
   }
@@ -33,8 +35,8 @@ public class JobDaoImpl implements JobDao {
   @Override
   public List<Job> getJobs() {
     Session session = sessionFactory.getCurrentSession();
-    Query<Job> query = session.createQuery("FROM Job order by id", Job.class);
-    return query.getResultList();
+    return session.createQuery("select distinct j from Job j left join fetch j.employees", Job.class)
+        .setHint(QueryHints.PASS_DISTINCT_THROUGH, false).getResultList();
   }
 
   @Override
