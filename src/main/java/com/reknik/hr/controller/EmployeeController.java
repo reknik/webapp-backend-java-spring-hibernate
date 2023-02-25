@@ -2,10 +2,13 @@ package com.reknik.hr.controller;
 
 import com.reknik.hr.entity.Employee;
 import com.reknik.hr.entity.dto.EmployeeDTO;
+import com.reknik.hr.security.WebAppUserRoles;
 import com.reknik.hr.service.EmployeeService;
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,12 +23,14 @@ public class EmployeeController {
     this.employeeService = employeeService;
   }
 
-  @GetMapping("/getById")
-  public ResponseEntity<EmployeeDTO> getById(@RequestParam(name = "id") long id) {
+  @GetMapping("/{employeeId}")
+  @RolesAllowed({"ADMIN","USER","EMPLOYEE"})
+  public ResponseEntity<EmployeeDTO> getById(@PathVariable(name = "employeeId") long id) {
     return new ResponseEntity<>(employeeService.getEmployeeById(id), HttpStatus.OK);
   }
 
-  @GetMapping(path = "/getAll", produces = {MediaType.APPLICATION_JSON_VALUE})
+  @GetMapping(path = "/", produces = {MediaType.APPLICATION_JSON_VALUE})
+  @RolesAllowed({"ADMIN","USER","EMPLOYEE"})
   public ResponseEntity<List<Employee>> getAll() {
     List<Employee> employees = null;
     try {
@@ -37,19 +42,22 @@ public class EmployeeController {
   }
 
   @PostMapping("/save")
+  @RolesAllowed({"ADMIN","EMPLOYEE"})
   public ResponseEntity<HttpStatus> save(@RequestBody EmployeeDTO employee) {
     employeeService.saveEmployee(employee);
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
   @PutMapping("/update")
+  @RolesAllowed({"ADMIN","EMPLOYEE"})
   public ResponseEntity<HttpStatus> update(@RequestBody EmployeeDTO employee) {
     employeeService.updateEmployee(employee);
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
-  @DeleteMapping("/deleteById")
-  public ResponseEntity<HttpStatus> deleteById(@RequestParam(name = "id") int id) {
+  @DeleteMapping("/{employeeId}")
+  @RolesAllowed({"ADMIN","EMPLOYEE"})
+  public ResponseEntity<HttpStatus> deleteById(@PathVariable(name = "employeeId") long id) {
     employeeService.deleteEmployeeById(id);
     return new ResponseEntity<>(HttpStatus.OK);
   }

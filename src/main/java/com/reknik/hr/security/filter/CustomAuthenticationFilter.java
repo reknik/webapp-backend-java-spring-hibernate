@@ -1,4 +1,4 @@
-package com.reknik.hr.security;
+package com.reknik.hr.security.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -17,7 +17,6 @@ import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.util.stream.Collectors;
 
 
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -50,7 +49,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         .withExpiresAt(new Date(Instant.now().plus(10, ChronoUnit.HOURS).toEpochMilli()))
         .withIssuer(request.getRequestURL().toString())
         .withClaim("role",
-            user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+            user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
         .sign(algorithm);
     String refreshToken = JWT.create()
         .withSubject(user.getUsername())

@@ -32,6 +32,11 @@ public class WebAppUser implements UserDetails {
   @Column(name = "role")
   private String role;
 
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+  @JoinTable(name = "user_company", joinColumns = @JoinColumn(name = "user_id"),
+      inverseJoinColumns = @JoinColumn(name = "company_id"))
+  private transient List<Company> companies;
+
   @Override
   public boolean isAccountNonExpired() {
     return true;
