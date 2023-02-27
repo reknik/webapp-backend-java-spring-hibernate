@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -29,8 +28,9 @@ public class WebAppUser implements UserDetails {
   @Column(name = "password")
   private String password;
 
-  @Column(name = "role")
-  private String role;
+  @JoinColumn(name = "user_id")
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  private List<WebAppUserAuthority> roles;
 
   @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
   @JoinTable(name = "user_company", joinColumns = @JoinColumn(name = "user_id"),
@@ -59,6 +59,6 @@ public class WebAppUser implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return List.of(new SimpleGrantedAuthority(this.role));
+    return roles;
   }
 }

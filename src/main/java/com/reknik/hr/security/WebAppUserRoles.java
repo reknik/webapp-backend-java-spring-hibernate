@@ -1,8 +1,5 @@
 package com.reknik.hr.security;
 
-import lombok.ToString;
-
-@ToString
 public enum WebAppUserRoles {
   ADMIN("ADMIN"), EMPLOYEE("EMPLOYEE"), USER("USER");
 
@@ -13,7 +10,7 @@ public enum WebAppUserRoles {
   }
 
   @Override
-  public String toString(){
+  public String toString() {
     return this.value;
   }
 }
