@@ -1,7 +1,5 @@
 package com.reknik.hr.controller;
 
-import com.reknik.hr.entity.WebAppUser;
-import com.reknik.hr.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
