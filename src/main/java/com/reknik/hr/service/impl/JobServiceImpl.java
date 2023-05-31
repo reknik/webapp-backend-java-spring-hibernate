@@ -2,8 +2,8 @@ package com.reknik.hr.service.impl;
 
 import com.reknik.hr.entity.Employee;
 import com.reknik.hr.entity.Job;
-import com.reknik.hr.entity.request.JobAddRequest;
 import com.reknik.hr.entity.dto.JobDTO;
+import com.reknik.hr.entity.request.JobAddRequest;
 import com.reknik.hr.repository.JobRepository;
 import com.reknik.hr.service.JobService;
 import jakarta.transaction.Transactional;

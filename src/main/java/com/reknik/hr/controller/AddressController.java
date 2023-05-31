@@ -1,8 +1,8 @@
 package com.reknik.hr.controller;
 
 import com.reknik.hr.entity.Address;
-import com.reknik.hr.entity.request.AddressAddRequest;
 import com.reknik.hr.entity.dto.AddressDTO;
+import com.reknik.hr.entity.request.AddressAddRequest;
 import com.reknik.hr.service.AddressService;
 import com.reknik.hr.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.reknik.hr.controller;
 
 import com.reknik.hr.entity.Job;
-import com.reknik.hr.entity.request.JobAddRequest;
 import com.reknik.hr.entity.dto.JobDTO;
+import com.reknik.hr.entity.request.JobAddRequest;
 import com.reknik.hr.service.EmployeeService;
 import com.reknik.hr.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,8 +68,8 @@ public class JobController {
     }
 
     @GetMapping("/getByEmployeeId/{employeeId}")
-    public ResponseEntity<List<JobDTO>> getByEmployeeId(@PathVariable("employeeId") long employeeId){
-        return new ResponseEntity<>(employeeService.getJobsByEmployeeId(employeeId),HttpStatus.OK);
+    public ResponseEntity<List<JobDTO>> getByEmployeeId(@PathVariable("employeeId") long employeeId) {
+        return new ResponseEntity<>(employeeService.getJobsByEmployeeId(employeeId), HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteById")

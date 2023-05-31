@@ -2,10 +2,10 @@ package com.reknik.hr.service.impl;
 
 import com.reknik.hr.entity.Company;
 import com.reknik.hr.entity.Employee;
-import com.reknik.hr.entity.request.EmployeeAddRequest;
 import com.reknik.hr.entity.dto.AddressDTO;
 import com.reknik.hr.entity.dto.EmployeeDTO;
 import com.reknik.hr.entity.dto.JobDTO;
+import com.reknik.hr.entity.request.EmployeeAddRequest;
 import com.reknik.hr.repository.CompanyRepository;
 import com.reknik.hr.repository.EmployeeRepository;
 import com.reknik.hr.service.EmployeeService;

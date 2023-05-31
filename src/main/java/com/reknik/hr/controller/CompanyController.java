@@ -24,6 +24,6 @@ public class CompanyController {
 
     @GetMapping("/getAll")
     public ResponseEntity<List<CompanyDTO>> getAllCompanies(Principal principal) {
-            return ResponseEntity.ok(companyService.getCompanies());
+        return ResponseEntity.ok(companyService.getCompanies());
     }
 }

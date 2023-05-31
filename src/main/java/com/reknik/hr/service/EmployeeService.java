@@ -1,9 +1,9 @@
 package com.reknik.hr.service;
 
-import com.reknik.hr.entity.request.EmployeeAddRequest;
 import com.reknik.hr.entity.dto.AddressDTO;
 import com.reknik.hr.entity.dto.EmployeeDTO;
 import com.reknik.hr.entity.dto.JobDTO;
+import com.reknik.hr.entity.request.EmployeeAddRequest;
 
 import java.util.List;
 

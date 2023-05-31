@@ -1,8 +1,8 @@
 package com.reknik.hr.service.impl;
 
 import com.reknik.hr.entity.Address;
-import com.reknik.hr.entity.request.AddressAddRequest;
 import com.reknik.hr.entity.Employee;
+import com.reknik.hr.entity.request.AddressAddRequest;
 import com.reknik.hr.repository.AddressRepository;
 import com.reknik.hr.repository.EmployeeRepository;
 import com.reknik.hr.service.AddressService;

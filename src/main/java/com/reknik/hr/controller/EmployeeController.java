@@ -1,7 +1,7 @@
 package com.reknik.hr.controller;
 
-import com.reknik.hr.entity.request.EmployeeAddRequest;
 import com.reknik.hr.entity.dto.EmployeeDTO;
+import com.reknik.hr.entity.request.EmployeeAddRequest;
 import com.reknik.hr.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
