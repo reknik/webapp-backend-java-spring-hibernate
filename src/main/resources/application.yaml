@@ -10,7 +10,6 @@ jwks:
 
 server:
   port : 8888
-
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/hr
@@ -21,4 +20,4 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:9090
+          issuer-uri: 'http://10.50.0.167:9090'
