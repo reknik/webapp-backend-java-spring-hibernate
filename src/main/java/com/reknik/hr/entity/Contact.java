@@ -4,21 +4,24 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
+
+import java.io.Serializable;
+
 @Entity
 @Table(name = "contact")
 @Getter
 @Setter
 @DynamicUpdate
-public class Contact {
+public class Contact implements Serializable {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
-  private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long id;
 
-  @Column(name = "phone")
-  private String phone;
+    @Column(name = "phone")
+    private String phone;
 
-  @Column(name = "email")
-  private String email;
+    @Column(name = "email")
+    private String email;
 }
