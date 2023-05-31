@@ -16,21 +16,22 @@ import java.util.Set;
 @DynamicUpdate
 public class Company {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
-  private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long id;
 
-  @Column(name = "address")
-  private String address;
+    @Column(name = "address")
+    private String address;
 
-  @Column(name = "phone")
-  private String phone;
+    @Column(name = "phone")
+    private String phone;
 
-  @Column(name = "name")
-  private String name;
+    @Column(name = "name")
+    private String name;
 
-  @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE})
-  @JoinTable(name = "e_companies", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "employee_id"))
-  private Set<Employee> employees;
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE})
+    @JoinTable(name = "e_companies", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns =
+    @JoinColumn(name = "employee_id"))
+    private Set<Employee> employees;
 }
