@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
@@ -17,20 +18,20 @@ import java.util.Set;
 @NoArgsConstructor
 @DynamicUpdate
 
-public class Job {
+public class Job implements Serializable {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
-  private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long id;
 
-  @Column(name = "title")
-  private String title;
+    @Column(name = "title")
+    private String title;
 
-  @JsonManagedReference
-  @JsonBackReference
-  @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE})
-  @JoinTable(name = "e_jobs", joinColumns = @JoinColumn(name = "job_id"),
-      inverseJoinColumns = @JoinColumn(name = "employee_id"))
-  private Set<Employee> employees;
+    @JsonManagedReference
+    @JsonBackReference
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE})
+    @JoinTable(name = "e_jobs", joinColumns = @JoinColumn(name = "job_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id"))
+    private Set<Employee> employees;
 }
