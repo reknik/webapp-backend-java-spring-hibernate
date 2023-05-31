@@ -1,31 +1,40 @@
 package com.reknik.hr.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "address")
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @DynamicUpdate
-public class Address {
+public class Address  implements Serializable {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
-  private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long id;
 
-  @Column(name = "city")
-  private String city;
+    @Column(name = "city")
+    private String city;
 
-  @Column(name = "address_details")
-  private String addressDetails;
+    @Column(name = "address_details")
+    private String addressDetails;
 
-  @Column(name = "postal_code")
-  private String postalCode;
+    @Column(name = "postal_code")
+    private String postalCode;
 
-  @Column(name = "country")
-  private String country;
+    @Column(name = "country")
+    private String country;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 }
