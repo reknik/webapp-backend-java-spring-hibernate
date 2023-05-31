@@ -12,9 +12,9 @@ import java.util.MissingResourceException;
 @RestControllerAdvice
 public class RestExceptionHandler {
 
-  @ExceptionHandler(value = {IllegalArgumentException.class, MissingResourceException.class})
-  @ResponseStatus(value = HttpStatus.NOT_FOUND)
-  public ErrorMessage objectNotFoundException(RuntimeException ex, WebRequest webRequest) {
-    return new ErrorMessage(ex.getMessage());
-  }
+    @ExceptionHandler(value = {IllegalArgumentException.class, MissingResourceException.class})
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public ErrorMessage objectNotFoundException(RuntimeException ex, WebRequest webRequest) {
+        return new ErrorMessage(ex.getMessage());
+    }
 }

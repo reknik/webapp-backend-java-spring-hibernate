@@ -1,16 +1,16 @@
 package com.reknik.hr.security;
 
 public enum WebAppUserRoles {
-  ADMIN("ADMIN"), EMPLOYEE("EMPLOYEE"), USER("USER");
+    ADMIN("ADMIN"), EMPLOYEE("EMPLOYEE"), USER("USER");
 
-  public final String value;
+    public final String value;
 
-  WebAppUserRoles(String value) {
-    this.value = value;
-  }
+    WebAppUserRoles(String value) {
+        this.value = value;
+    }
 
-  @Override
-  public String toString() {
-    return this.value;
-  }
+    @Override
+    public String toString() {
+        return this.value;
+    }
 }
