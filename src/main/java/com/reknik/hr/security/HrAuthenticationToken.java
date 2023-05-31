@@ -9,12 +9,12 @@ import java.util.List;
 
 public class HrAuthenticationToken extends JwtAuthenticationToken {
 
-  public HrAuthenticationToken(Jwt jwt, Collection<? extends GrantedAuthority> authorities,
-                               List<Long> companyIds) {
-    super(jwt, authorities);
-    this.companyIds = List.copyOf(companyIds);
-  }
+    private final List<Long> companyIds;
 
-  private List<Long> companyIds;
+    public HrAuthenticationToken(Jwt jwt, Collection<? extends GrantedAuthority> authorities,
+                                 List<Long> companyIds) {
+        super(jwt, authorities);
+        this.companyIds = List.copyOf(companyIds);
+    }
 
 }
