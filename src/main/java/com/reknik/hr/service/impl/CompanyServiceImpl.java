@@ -38,7 +38,13 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public List<CompanyDTO> getCompanies() {
         List<Long> companyIds = authenticationHelperService.getCurrentUserCompanies();
-        return companyRepository.findAllById(companyIds)
+        List<Company> companies;
+        if (authenticationHelperService.getCurrentUserRoles().contains("ADMIN")) {
+            companies = companyRepository.findAll();
+        } else {
+            companies = companyRepository.findAllById(companyIds);
+        }
+        return companies
                 .stream()
                 .map(company -> CompanyDTO.builder()
                         .id(company.getId())
