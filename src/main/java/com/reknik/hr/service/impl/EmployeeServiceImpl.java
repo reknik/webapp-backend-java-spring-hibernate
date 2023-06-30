@@ -67,6 +67,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return EmployeeDTO.builder()
                 .id(employeeOptional.get().getId())
                 .firstName(employeeOptional.get().getFirstName())
+                .companies(employeeOptional.get().getCompanies().stream().map(Company::getId).toList())
                 .lastName(employeeOptional.get().getLastName())
                 .drivingLicense(employeeOptional.get().isDrivingLicense())
                 .build();
@@ -78,7 +79,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         List<Long> companies = authenticationHelperService.getCurrentUserCompanies();
         List<String> roles = authenticationHelperService.getCurrentUserRoles();
-        if (!roles.contains("EMPLOYEE")) {
+        if (!roles.contains("ADMIN")) {
             return employeeRepository.findAll().stream()
                     .filter(employee -> employee.getCompanies()
                             .stream()
@@ -87,6 +88,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                             .id(employee.getId())
                             .firstName(employee.getFirstName())
                             .lastName(employee.getLastName())
+                            .companies(employee.getCompanies().stream().map(Company::getId).toList())
                             .drivingLicense(employee.isDrivingLicense())
                             .build())
                     .toList();
