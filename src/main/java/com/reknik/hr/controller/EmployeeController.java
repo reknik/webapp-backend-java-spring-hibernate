@@ -32,19 +32,20 @@ public class EmployeeController {
     @PostMapping("/save")
     @PreAuthorize("principal.claims['roles'].contains('EMPLOYEE')")
     public ResponseEntity<HttpStatus> save(@RequestBody EmployeeAddRequest employee) {
+        employee.setId(0);
         employeeService.saveEmployee(employee);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    @PreAuthorize("principal.claims['roles'].contains('ADMIN') ")
+    @PreAuthorize("principal.claims['roles'].contains('EMPLOYEE') ")
     public ResponseEntity<HttpStatus> update(@RequestBody EmployeeAddRequest employee) {
         employeeService.updateEmployee(employee);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{employeeId}")
-    @PreAuthorize("principal.claims['roles'].contains('EMPLOYEE')")
+    @PreAuthorize("principal.claims['roles'].contains('ADMIN')")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable(name = "employeeId") long id) {
         employeeService.deleteEmployeeById(id);
         return new ResponseEntity<>(HttpStatus.OK);

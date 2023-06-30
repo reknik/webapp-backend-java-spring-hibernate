@@ -1,6 +1,7 @@
 package com.reknik.hr.service;
 
 import com.reknik.hr.entity.dto.AddressDTO;
+import com.reknik.hr.entity.dto.ContactDTO;
 import com.reknik.hr.entity.dto.EmployeeDTO;
 import com.reknik.hr.entity.dto.JobDTO;
 import com.reknik.hr.entity.request.EmployeeAddRequest;
@@ -22,4 +23,6 @@ public interface EmployeeService {
     List<JobDTO> getJobsByEmployeeId(long employeeId);
 
     List<AddressDTO> getAddressesByEmployeeId(long employeeId);
+
+    List<ContactDTO> getContactsByEmployeeId(long employeeId);
 }

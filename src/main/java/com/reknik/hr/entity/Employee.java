@@ -2,19 +2,18 @@ package com.reknik.hr.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "employee")
 @Getter
 @Setter
+@Builder
 @DynamicUpdate
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,22 +33,26 @@ public class Employee implements Serializable {
     @Column(name = "d_license")
     private boolean drivingLicense;
 
-    @OneToMany(mappedBy = "employee")
-    private List<Address> addresses;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @Builder.Default
+    private List<Address> addresses = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
-    private List<Contact> contacts;
+    @Builder.Default
+    private List<Contact> contacts = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "e_companies", joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "company_id"))
-    private List<Company> companies;
+    @Builder.Default
+    private List<Company> companies = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "e_jobs", joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "job_id"))
-    private List<Job> jobs;
+    @Builder.Default
+    private List<Job> jobs = new ArrayList<>();
 
     @Column(name = "birth_date")
     private int birthDate;
