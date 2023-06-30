@@ -43,9 +43,9 @@ public class AddressServiceImpl implements AddressService {
     public void saveAddress(AddressAddRequest address) {
         Address addressEntity = Address.builder()
                 .city(address.getCity())
-                .addressDetails(getMaskedAddressDetails(address.getAddressDetails()))
+                .addressDetails(getMaskedDetails(address.getAddressDetails()))
                 .country(address.getCountry())
-                .postalCode(address.getPostalCode())
+                .postalCode(getMaskedDetails(address.getPostalCode()))
                 .build();
 
         Employee employee = employeeRepository.findById(address.getEmployeeId()).orElseThrow();
@@ -53,8 +53,8 @@ public class AddressServiceImpl implements AddressService {
         addressRepository.save(addressEntity);
     }
 
-    private String getMaskedAddressDetails(String addressDetails) {
-        return addressDetails.replaceAll(".{" + addressDetails.length() / 2 + "}$", "x");
+    private String getMaskedDetails(String string) {
+        return string.replaceAll(".{" + string.length() / 2 + "}$", "x".repeat(string.length() / 2));
     }
 
     @Override

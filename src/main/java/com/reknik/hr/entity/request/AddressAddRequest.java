@@ -1,7 +1,10 @@
 package com.reknik.hr.entity.request;
 
+import lombok.Builder;
+
 import java.io.Serializable;
 
+@Builder
 public class AddressAddRequest implements Serializable {
 
     private long employeeId;
