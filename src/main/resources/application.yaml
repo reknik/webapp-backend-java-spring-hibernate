@@ -1,23 +1,22 @@
-#
-# JWT properties
-#
-jwt:
-  salt: testSalt
-
-jwks:
-  uri: http://localhost:9090/oauth2/jwks
-
-
 server:
+  http2:
+    enabled: true
   port: 8888
+  ssl:
+    key-store-type: PKCS12
+    key-store: classpath:keystore/self-signed-cert.p12
+    key-store-password: changeit
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
   datasource:
     url: jdbc:mysql://localhost:3306/hr
     username: root
-    password: '[D5DQYn}+goNs&x7R&d!/kJbE!xr^E'
+    password: 'root'
     driver-class-name: com.mysql.cj.jdbc.Driver
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: 'http://10.50.0.167:9090'
+          issuer-uri: 'https://10.50.0.167:9090'
