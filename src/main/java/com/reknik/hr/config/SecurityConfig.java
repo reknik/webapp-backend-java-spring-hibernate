@@ -1,6 +1,5 @@
 package com.reknik.hr.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -13,9 +12,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-
-    @Value("${jwks.uri}")
-    private String jwksUri;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
