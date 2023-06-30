@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.2</version>
+        <version>3.1.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.reknik</groupId>
@@ -14,13 +14,21 @@
     <name>webAppDemoBackend</name>
     <description>Demo project for Spring Boot</description>
     <properties>
-        <java.version>17</java.version>
+        <maven.compiler.target>1.17</maven.compiler.target>
+        <maven.compiler.source>1.17</maven.compiler.source>
     </properties>
     <dependencies>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>2.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
@@ -58,32 +66,25 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-core</artifactId>
-            <version>11.0.0-M5</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>6.0.3</version>
+            <version>6.1.1</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.15.0</version>
+            <version>2.15.2</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>6.0.8</version>
+            <version>6.0.10</version>
         </dependency>
 
 
@@ -91,7 +92,7 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>6.0.3</version>
+            <version>6.1.1</version>
         </dependency>
 
         <dependency>
@@ -104,21 +105,28 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
-            <version>3.0.6</version>
+            <version>3.1.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.codehaus.plexus/plexus-utils -->
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <version>4.0.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.26</version>
+            <version>1.18.28</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>6.0.8</version>
+            <version>6.0.10</version>
         </dependency>
 
         <dependency>
@@ -137,14 +145,13 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>3.0.5</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.2.2.Final</version>
+            <version>6.2.5.Final</version>
         </dependency>
 
     </dependencies>
@@ -154,17 +161,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.3.0</version>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.0.6</version>
+                <version>3.1.1</version>
             </plugin>
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>8.1.0</version>
+                <version>8.3.1</version>
                 <executions>
                     <execution>
                         <goals>
@@ -176,9 +183,8 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>2.15.0</version>
+                <version>2.16.0</version>
                 <configuration>
-                    <allowAnyUpdates>true</allowAnyUpdates>
                     <allowMajorUpdates>true</allowMajorUpdates>
                     <allowMinorUpdates>true</allowMinorUpdates>
                     <processDependencyManagement>false</processDependencyManagement>
